@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>အေးချမ်းသော နေရာ (Peaceful Space)</title>
+  <style>
+    /* မျက်စိကို အနားပေးတဲ့ အရောင်စနစ် (Soft Pastel Theme) */
+    :root {
+      --bg-gradient-start: #e0f2f1;
+      --bg-gradient-end: #b2dfdb;
+      --text-color: #004d40;
+      --box-bg: rgba(255, 255, 255, 0.85);
+      --button-color: #80cbc4;
+      --button-hover: #4db6ac;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Pyidaungsu', 'Myanmar Text', sans-serif;
+      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      /* နောက်ခံမှာ ဖြည်းဖြည်းချင်း အရောင်ပြောင်းတဲ့ Animation */
+      background-size: 200% 200%;
+      animation: gradientShift 15s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background: var(--box-bg);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(0, 77, 64, 0.1);
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    p.subtitle {
+      font-size: 1rem;
+      margin-bottom: 25px;
+      color: #00695c;
+      opacity: 0.8;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 15px;
+      border: 2px solid transparent;
+      border-radius: 16px;
+      background: #ffffff;
+      color: #004d40;
+      font-family: inherit;
+      font-size: 1.1rem;
+      resize: none;
+      outline: none;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
+      transition: border-color 0.3s ease;
+      margin-bottom: 20px;
+    }
+
+    textarea:focus {
+      border-color: var(--button-hover);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    button {
+      font-family: inherit;
+      font-size: 1.1rem;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 50px;
+      background-color: var(--button-color);
+      color: #ffffff;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(128, 203, 196, 0.4);
+      transition: all 0.3s ease;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    button:hover {
+      background-color: var(--button-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(77, 182, 172, 0.6);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* အေးချမ်းစေတဲ့ အသက်ရှူမှု Animation (Breathing Circle) */
+    .breathing-circle {
+      width: 80px;
+      height: 80px;
+      background: rgba(178, 223, 219, 0.5);
+      border-radius: 50%;
+      margin: 0 auto 20px auto;
+      animation: breathe 8s ease-in-out infinite;
+      box-shadow: 0 0 20px rgba(178, 223, 219, 0.6);
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(0.8); opacity: 0.6; }
+      50% { transform: scale(1.2); opacity: 1; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- အသက်ရှူမှု Animation -->
+    <div class="breathing-circle"></div>
+    
+    <h1>အေးချမ်းသော နေရာ</h1>
+    <p class="subtitle">စိတ်အေးအေးနဲ့ ဒီနေရာမှာ အနားယူပါ။</p>
+
+    <textarea id="textInput" placeholder="ဒီနေရာမှာ မြန်မာစာ ရိုက်ထည့်ပါ... (ဥပမာ - ဒီနေ့ဟာ ကောင်းမွန်တဲ့ နေ့တစ်နေ့ပါပဲ။)"></textarea>
+
+    <div class="button-group">
+      <button id="speakBtn" onclick="speakText()">
+        🎧 အသံဖတ်မည်
+      </button>
+      <button id="stopBtn" onclick="stopText()" style="background-color: #e0e0e0; color: #666; box-shadow: none;">
+        ⏹ ရပ်မည်
+      </button>
+    </div>
+  </div>
+
+  <script>
+    let speechSynthesis = window.speechSynthesis;
+    let utterance = null;
+
+    function speakText() {
+      const text = document.getElementById('textInput').value;
+      
+      if (text.trim() === '') {
+        alert('အသံဖတ်ဖို့အတွက် စာသား အရင်ရိုက်ထည့်ပေးပါဦး။');
+        return;
+      }
+
+      // အသံဖတ်နေတာ ရှိရင် အရင်ရပ်မယ်
+      stopText();
+
+      utterance = new SpeechSynthesisUtterance(text);
+      
+      // မြန်မာဘာသာစကား သတ်မှတ်ခြင်း
+      utterance.lang = 'my-MM'; 
+      
+      // အသံကို နှေးနှေးနဲ့ အေးအေးဆေးဆေး ဖတ်စေရန် 
+      utterance.rate = 0.9; // အမြန်နှုန်း (1 is normal)
+      utterance.pitch = 1.0; // အသံအနိမ့်အမြင့်
+
+      // အသံဖတ်နေစဉ် Button ကို ပိတ်ထားမယ်
+      document.getElementById('speakBtn').disabled = true;
+      document.getElementById('speakBtn').innerHTML = '🗣️ ဖတ်နေသည်...';
+
+      // အသံဖတ်ပြီးသွားရင် Button ကို ပြန်ဖွင့်မယ်
+      utterance.onend = function() {
+        document.getElementById('speakBtn').disabled = false;
+        document.getElementById('speakBtn').innerHTML = '🎧 အသံဖတ်မည်';
+      };
+
+      // အသံဖတ်တာ Error တက်ရင်
+      utterance.onerror = function(event) {
+        console.error('Speech synthesis error:', event);
+        alert('အသံဖတ်လို့ မရဖြစ်နေပါတယ်။ သင့်ဖုန်းရဲ့ Settings မှာ မြန်မာ Text-to-Speech ကို အရင်သွင်းထားဖို့ လိုအပ်ပါတယ်။');
+        document.getElementById('speakBtn').disabled = false;
+        document.getElementById('speakBtn').innerHTML = '🎧 အသံဖတ်မည်';
+      };
+
+      // စတင်ဖတ်ဆိုခြင်း
+      speechSynthesis.speak(utterance);
+    }
+
+    function stopText() {
+      if (speechSynthesis.speaking) {
+        speechSynthesis.cancel();
+        document.getElementById('speakBtn').disabled = false;
+        document.getElementById('speakBtn').innerHTML = '🎧 အသံဖတ်မည်';
+      }
+    }
+  </script>
+</body>
+</html>
