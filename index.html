@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>အေးချမ်းသော နေရာ (Peaceful Space)</title>
+  <title>အေးချမ်းသော မြန်မာအသံ (Peaceful Myanmar Voice)</title>
   <style>
-    /* မျက်စိကို အနားပေးတဲ့ အရောင်စနစ် (Soft Pastel Theme) */
     :root {
       --bg-gradient-start: #e0f2f1;
       --bg-gradient-end: #b2dfdb;
       --text-color: #004d40;
-      --box-bg: rgba(255, 255, 255, 0.85);
-      --button-color: #80cbc4;
-      --button-hover: #4db6ac;
+      --box-bg: rgba(255, 255, 255, 0.9);
+      --button-color: #26a69a;
+      --button-hover: #00897b;
     }
 
     * {
@@ -31,7 +30,6 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
-      /* နောက်ခံမှာ ဖြည်းဖြည်းချင်း အရောင်ပြောင်းတဲ့ Animation */
       background-size: 200% 200%;
       animation: gradientShift 15s ease infinite;
     }
@@ -45,83 +43,105 @@
     .container {
       background: var(--box-bg);
       backdrop-filter: blur(10px);
-      padding: 30px;
+      padding: 25px;
       border-radius: 24px;
-      box-shadow: 0 8px 32px rgba(0, 77, 64, 0.1);
+      box-shadow: 0 8px 32px rgba(0, 77, 64, 0.15);
       width: 100%;
       max-width: 500px;
-      text-align: center;
-      transition: transform 0.3s ease;
     }
 
     h1 {
-      font-size: 1.8rem;
-      margin-bottom: 10px;
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+      text-align: center;
       font-weight: 600;
-      letter-spacing: 1px;
     }
 
-    p.subtitle {
-      font-size: 1rem;
-      margin-bottom: 25px;
+    .settings-group {
+      background: #ffffff;
+      padding: 15px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
+    }
+
+    label {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: bold;
+      margin-bottom: 8px;
       color: #00695c;
-      opacity: 0.8;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #b2dfdb;
+      background: #f1f8f7;
+      font-family: inherit;
+      font-size: 1rem;
+      color: #004d40;
+      margin-bottom: 15px;
+      outline: none;
+    }
+
+    /* လူသံပိုတူအောင် ချိန်ညှိဖို့ Slider များ */
+    .slider-container {
+      margin-bottom: 10px;
+    }
+    
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--button-color);
     }
 
     textarea {
       width: 100%;
-      height: 150px;
+      height: 120px;
       padding: 15px;
       border: 2px solid transparent;
       border-radius: 16px;
-      background: #ffffff;
+      background: #fafafa;
       color: #004d40;
       font-family: inherit;
       font-size: 1.1rem;
       resize: none;
       outline: none;
       box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
-      transition: border-color 0.3s ease;
       margin-bottom: 20px;
     }
 
     textarea:focus {
       border-color: var(--button-hover);
+      background: #ffffff;
     }
 
     .button-group {
       display: flex;
-      gap: 15px;
-      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     button {
       font-family: inherit;
-      font-size: 1.1rem;
-      padding: 12px 24px;
+      font-size: 1rem;
+      padding: 12px 20px;
       border: none;
       border-radius: 50px;
       background-color: var(--button-color);
       color: #ffffff;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(128, 203, 196, 0.4);
+      box-shadow: 0 4px 15px rgba(38, 166, 154, 0.3);
       transition: all 0.3s ease;
       flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
+      min-width: 120px;
     }
 
     button:hover {
       background-color: var(--button-hover);
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(77, 182, 172, 0.6);
-    }
-
-    button:active {
-      transform: translateY(0);
     }
 
     button:disabled {
@@ -131,20 +151,14 @@
       box-shadow: none;
     }
 
-    /* အေးချမ်းစေတဲ့ အသက်ရှူမှု Animation (Breathing Circle) */
-    .breathing-circle {
-      width: 80px;
-      height: 80px;
-      background: rgba(178, 223, 219, 0.5);
-      border-radius: 50%;
-      margin: 0 auto 20px auto;
-      animation: breathe 8s ease-in-out infinite;
-      box-shadow: 0 0 20px rgba(178, 223, 219, 0.6);
+    #downloadBtn {
+      background-color: #ffb74d;
+      box-shadow: 0 4px 15px rgba(255, 183, 77, 0.3);
+      display: none; /* အသံဖတ်ပြီးမှ ပေါ်လာမယ် */
     }
 
-    @keyframes breathe {
-      0%, 100% { transform: scale(0.8); opacity: 0.6; }
-      50% { transform: scale(1.2); opacity: 1; }
+    #downloadBtn:hover {
+      background-color: #ffa726;
     }
 
   </style>
@@ -152,76 +166,185 @@
 <body>
 
   <div class="container">
-    <!-- အသက်ရှူမှု Animation -->
-    <div class="breathing-circle"></div>
-    
-    <h1>အေးချမ်းသော နေရာ</h1>
-    <p class="subtitle">စိတ်အေးအေးနဲ့ ဒီနေရာမှာ အနားယူပါ။</p>
+    <h1>🎧 အေးချမ်းသော မြန်မာအသံ</h1>
 
-    <textarea id="textInput" placeholder="ဒီနေရာမှာ မြန်မာစာ ရိုက်ထည့်ပါ... (ဥပမာ - ဒီနေ့ဟာ ကောင်းမွန်တဲ့ နေ့တစ်နေ့ပါပဲ။)"></textarea>
+    <!-- အသံ ရွေးချယ်ခြင်းနှင့် ချိန်ညှိခြင်း -->
+    <div class="settings-group">
+      <label for="voiceSelect">အသံ ရွေးချယ်ပါ -</label>
+      <select id="voiceSelect"></select>
+
+      <div class="slider-container">
+        <label>အသံအမြန်နှုန်း (နှေးချင်ရင် ဘယ်ဘက်ကို ဆွဲပါ) - <span id="rateVal">0.9</span></label>
+        <input type="range" id="rate" min="0.5" max="1.5" step="0.1" value="0.9">
+      </div>
+
+      <div class="slider-container">
+        <label>အသံအနိမ့်အမြင့် - <span id="pitchVal">1.0</span></label>
+        <input type="range" id="pitch" min="0.5" max="1.5" step="0.1" value="1.0">
+      </div>
+    </div>
+
+    <textarea id="textInput" placeholder="ဒီနေရာမှာ မြန်မာစာ ရိုက်ထည့်ပါ..."></textarea>
 
     <div class="button-group">
-      <button id="speakBtn" onclick="speakText()">
-        🎧 အသံဖတ်မည်
-      </button>
-      <button id="stopBtn" onclick="stopText()" style="background-color: #e0e0e0; color: #666; box-shadow: none;">
-        ⏹ ရပ်မည်
-      </button>
+      <button id="speakBtn" onclick="speakText()">🎧 အသံဖတ်မည်</button>
+      <button id="stopBtn" onclick="stopText()" style="background-color: #e0e0e0; color: #666; box-shadow: none;">⏹ ရပ်မည်</button>
+    </div>
+    
+    <!-- ဒေါင်းလုဒ် ခလုတ် -->
+    <div style="margin-top: 15px;">
+        <button id="downloadBtn" onclick="downloadAudio()">💾 အသံဖိုင် သိမ်းမည်</button>
     </div>
   </div>
 
   <script>
-    let speechSynthesis = window.speechSynthesis;
-    let utterance = null;
+    const synth = window.speechSynthesis;
+    let voices = [];
+    let currentUtterance = null;
+    let audioBlob = null; // ဒေါင်းလုဒ်အတွက် သိမ်းထားမယ့် နေရာ
 
+    const voiceSelect = document.getElementById('voiceSelect');
+    const rateInput = document.getElementById('rate');
+    const pitchInput = document.getElementById('pitch');
+    const rateVal = document.getElementById('rateVal');
+    const pitchVal = document.getElementById('pitchVal');
+    const speakBtn = document.getElementById('speakBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    // Slider တွေရွှေ့ရင် နံပါတ်ပြောင်းပြရန်
+    rateInput.oninput = () => rateVal.innerText = rateInput.value;
+    pitchInput.oninput = () => pitchVal.innerText = pitchInput.value;
+
+    // ဖုန်းထဲက အသံတွေကို ဆွဲထုတ်ခြင်း
+    function populateVoices() {
+      voices = synth.getVoices();
+      voiceSelect.innerHTML = '';
+      
+      // မြန်မာအသံကို အရင်ရှာမယ်
+      let mmVoices = voices.filter(v => v.lang.includes('my') || v.lang.includes('MY'));
+      
+      // တကယ်လို့ မြန်မာအသံ မရှိရင် အားလုံးကို ပြမယ်
+      let voicesToShow = mmVoices.length > 0 ? mmVoices : voices;
+
+      if (voicesToShow.length === 0) {
+        voiceSelect.innerHTML = '<option>ဖုန်းထဲမှာ အသံ မရှိသေးပါ</option>';
+      }
+
+      voicesToShow.forEach((voice, index) => {
+        let option = document.createElement('option');
+        option.value = index;
+        option.textContent = `${voice.name} (${voice.lang})`;
+        // မြန်မာအသံကို Default ရွေးထားမယ်
+        if (voice.lang.includes('my') || voice.lang.includes('MY')) {
+          option.selected = true;
+        }
+        voiceSelect.appendChild(option);
+      });
+    }
+
+    // အသံစာရင်း Load ဖြစ်တာနဲ့ ခေါ်မယ်
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = populateVoices;
+    }
+    populateVoices();
+
+    // စာသားဖတ်ခြင်း
     function speakText() {
       const text = document.getElementById('textInput').value;
-      
       if (text.trim() === '') {
-        alert('အသံဖတ်ဖို့အတွက် စာသား အရင်ရိုက်ထည့်ပေးပါဦး။');
+        alert('အသံဖတ်ဖို့အတွက် စာသား အရင်ရိုက်ထည့်ပါဦး။');
         return;
       }
 
-      // အသံဖတ်နေတာ ရှိရင် အရင်ရပ်မယ်
-      stopText();
+      stopText(); // အရင်ဖတ်နေတာရှိရင် ရပ်မယ်
+      downloadBtn.style.display = 'none'; // ဒေါင်းလုဒ်ခလုတ်ကို ဖျောက်ထားမယ်
 
-      utterance = new SpeechSynthesisUtterance(text);
+      currentUtterance = new SpeechSynthesisUtterance(text);
       
-      // မြန်မာဘာသာစကား သတ်မှတ်ခြင်း
-      utterance.lang = 'my-MM'; 
+      // ရွေးထားတဲ့ အသံကို သတ်မှတ်မယ်
+      const selectedVoiceIndex = voiceSelect.value;
+      if (voices.length > 0 && selectedVoiceIndex !== '') {
+          currentUtterance.voice = voices[selectedVoiceIndex] || voices.find(v => v.lang.includes('my'));
+      }
       
-      // အသံကို နှေးနှေးနဲ့ အေးအေးဆေးဆေး ဖတ်စေရန် 
-      utterance.rate = 0.9; // အမြန်နှုန်း (1 is normal)
-      utterance.pitch = 1.0; // အသံအနိမ့်အမြင့်
+      currentUtterance.rate = parseFloat(rateInput.value);
+      currentUtterance.pitch = parseFloat(pitchInput.value);
 
-      // အသံဖတ်နေစဉ် Button ကို ပိတ်ထားမယ်
-      document.getElementById('speakBtn').disabled = true;
-      document.getElementById('speakBtn').innerHTML = '🗣️ ဖတ်နေသည်...';
+      speakBtn.disabled = true;
+      speakBtn.innerHTML = '🗣️ ဖတ်နေသည်...';
 
-      // အသံဖတ်ပြီးသွားရင် Button ကို ပြန်ဖွင့်မယ်
-      utterance.onend = function() {
-        document.getElementById('speakBtn').disabled = false;
-        document.getElementById('speakBtn').innerHTML = '🎧 အသံဖတ်မည်';
+      // ဖတ်ပြီးသွားရင်
+      currentUtterance.onend = function() {
+        speakBtn.disabled = false;
+        speakBtn.innerHTML = '🎧 အသံဖတ်မည်';
+        // ဒေါင်းလုဒ်ခလုတ်ကို ပြမယ်
+        downloadBtn.style.display = 'block'; 
       };
 
-      // အသံဖတ်တာ Error တက်ရင်
-      utterance.onerror = function(event) {
-        console.error('Speech synthesis error:', event);
-        alert('အသံဖတ်လို့ မရဖြစ်နေပါတယ်။ သင့်ဖုန်းရဲ့ Settings မှာ မြန်မာ Text-to-Speech ကို အရင်သွင်းထားဖို့ လိုအပ်ပါတယ်။');
-        document.getElementById('speakBtn').disabled = false;
-        document.getElementById('speakBtn').innerHTML = '🎧 အသံဖတ်မည်';
+      currentUtterance.onerror = function(event) {
+        console.error(event);
+        alert('အသံဖတ်လို့ မရဖြစ်နေပါတယ်။ ဖုန်း Settings မှာ မြန်မာ Text-to-Speech သွင်းထားဖို့ လိုပါတယ်။');
+        speakBtn.disabled = false;
+        speakBtn.innerHTML = '🎧 အသံဖတ်မည်';
       };
 
-      // စတင်ဖတ်ဆိုခြင်း
-      speechSynthesis.speak(utterance);
+      synth.speak(currentUtterance);
     }
 
     function stopText() {
-      if (speechSynthesis.speaking) {
-        speechSynthesis.cancel();
-        document.getElementById('speakBtn').disabled = false;
-        document.getElementById('speakBtn').innerHTML = '🎧 အသံဖတ်မည်';
+      if (synth.speaking) {
+        synth.cancel();
+        speakBtn.disabled = false;
+        speakBtn.innerHTML = '🎧 အသံဖတ်မည်';
       }
+    }
+
+    // အသံဖိုင် (Audio File) အဖြစ် သိမ်းဆည်းခြင်း
+    // မှတ်ချက် - Browser အများစုမှာ Speech Synthesis ကို တိုက်ရိုက် ဖိုင်အဖြစ် ဆွဲချဖို့ ခက်ခဲပါတယ်။ 
+    // ဒါကြောင့် အကောင်းဆုံးနည်းလမ်းဖြစ်တဲ့ MediaRecorder နည်းပညာကို သုံးပြီး ဖုန်း Microphone ကတစ်ဆင့် ပြန်အသံသွင်းတဲ့ နည်းကို အသုံးပြုထားပါတယ်။
+    async function downloadAudio() {
+        const text = document.getElementById('textInput').value;
+        if(!text) return;
+
+        // ဒေါင်းလုဒ်လုပ်ရာမှာ ဖုန်းရဲ့ Speaker အသံကို ဖမ်းယူဖို့ ခွင့်ပြုချက်တောင်းပါမယ်
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const mediaRecorder = new MediaRecorder(stream);
+            const audioChunks = [];
+
+            mediaRecorder.ondataavailable = event => {
+                audioChunks.push(event.data);
+            };
+
+            mediaRecorder.onstop = () => {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                const audioUrl = URL.createObjectURL(audioBlob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = audioUrl;
+                a.download = 'myanmar_voice.wav';
+                document.body.appendChild(a);
+                a.click();
+                URL.revokeObjectURL(audioUrl);
+                stream.getTracks().forEach(track => track.stop()); // မိုက်ပိတ်
+            };
+
+            mediaRecorder.start();
+            speakText(); // အသံစတင်ဖတ်မယ်
+
+            // ဖတ်ပြီးတဲ့အထိ စောင့်ပြီး သွင်းယူမယ်
+            currentUtterance.onend = function() {
+                setTimeout(() => {
+                    mediaRecorder.stop();
+                    speakBtn.disabled = false;
+                    speakBtn.innerHTML = '🎧 အသံဖတ်မည်';
+                }, 500); 
+            };
+
+        } catch (err) {
+            alert("ဒေါင်းလုဒ်လုပ်ရန် မိုက်ခရိုဖုန်း အသုံးပြုခွင့် (Microphone Permission) ပြုပြင်ပေးဖို့ လိုအပ်ပါတယ်။ (Speaker မှတစ်ဆင့် အသံကို ပြန်ဖမ်းယူသောကြောင့်ပါ)");
+            console.error(err);
+        }
     }
   </script>
 </body>
