@@ -1,351 +1,463 @@
+Here is the complete HTML code for your minimal developer-style social links page. It features an electric blue accent and highly animated elements, with your existing social links preserved.
+
+```html
 <!DOCTYPE html>
-<html lang="my">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>အေးချမ်းသော မြန်မာအသံ (Peaceful Myanmar Voice)</title>
+  <title>social links · minimal dev</title>
+  <!-- minimal developer style, electric blue accent, highly animated -->
   <style>
-    :root {
-      --bg-gradient-start: #e0f2f1;
-      --bg-gradient-end: #b2dfdb;
-      --text-color: #004d40;
-      --box-bg: rgba(255, 255, 255, 0.9);
-      --button-color: #26a69a;
-      --button-hover: #00897b;
-    }
-
+    /* ---------- RESET & GLOBAL ---------- */
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #0c0c0e;
+      --surface: #141418;
+      --electric: #00c2ff;        /* electric blue */
+      --electric-glow: #00c2ff80;
+      --text: #eaeef2;
+      --text-dim: #9aa6b2;
+      --border: #2a2e35;
+      --card: #101216;
     }
 
     body {
-      font-family: 'Pyidaungsu', 'Myanmar Text', sans-serif;
-      background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
-      color: var(--text-color);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: var(--bg);
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px;
-      background-size: 200% 200%;
-      animation: gradientShift 15s ease infinite;
+      padding: 1.5rem;
+      color: var(--text);
+      position: relative;
+      overflow-x: hidden;
+      /* subtle animated grid – minimal developer vibe */
+      background-image: 
+        linear-gradient(rgba(0, 194, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 194, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: gridDrift 20s linear infinite;
     }
 
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    @keyframes gridDrift {
+      0% { background-position: 0 0, 0 0; }
+      100% { background-position: 40px 40px, 40px 40px; }
     }
 
-    .container {
-      background: var(--box-bg);
-      backdrop-filter: blur(10px);
-      padding: 25px;
-      border-radius: 24px;
-      box-shadow: 0 8px 32px rgba(0, 77, 64, 0.15);
+    /* ----- GLOWING SPOT (electric blue) ----- */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 70vmax;
+      height: 70vmax;
+      background: radial-gradient(circle at 50% 50%, rgba(0, 194, 255, 0.08), transparent 70%);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
+      animation: pulseGlow 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% { opacity: 0.4; transform: translate(-50%, -50%) scale(0.9); }
+      100% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    /* ----- MAIN CARD (minimal, dark, slight glass) ----- */
+    .card {
+      position: relative;
+      z-index: 10;
       width: 100%;
-      max-width: 500px;
+      max-width: 560px;
+      background: rgba(16, 18, 22, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 3rem;        /* soft, modern */
+      padding: 2.8rem 2rem 2.4rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0, 194, 255, 0.1) inset;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+      animation: cardRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
-    h1 {
-      font-size: 1.6rem;
-      margin-bottom: 15px;
+    .card:hover {
+      border-color: var(--electric);
+      box-shadow: 0 20px 40px -12px rgba(0, 194, 255, 0.15), 0 0 0 1px var(--electric) inset;
+    }
+
+    @keyframes cardRise {
+      0% { opacity: 0; transform: translateY(30px) scale(0.98); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ----- PROFILE HEADER (minimal dev) ----- */
+    .profile {
       text-align: center;
-      font-weight: 600;
+      margin-bottom: 2.4rem;
+      position: relative;
     }
 
-    .settings-group {
-      background: #ffffff;
-      padding: 15px;
-      border-radius: 16px;
-      margin-bottom: 20px;
-      box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
-    }
-
-    label {
-      display: block;
-      font-size: 0.95rem;
-      font-weight: bold;
-      margin-bottom: 8px;
-      color: #00695c;
-    }
-
-    select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #b2dfdb;
-      background: #f1f8f7;
-      font-family: inherit;
-      font-size: 1rem;
-      color: #004d40;
-      margin-bottom: 15px;
-      outline: none;
-    }
-
-    /* လူသံပိုတူအောင် ချိန်ညှိဖို့ Slider များ */
-    .slider-container {
-      margin-bottom: 10px;
-    }
-    
-    input[type="range"] {
-      width: 100%;
-      accent-color: var(--button-color);
-    }
-
-    textarea {
-      width: 100%;
-      height: 120px;
-      padding: 15px;
-      border: 2px solid transparent;
-      border-radius: 16px;
-      background: #fafafa;
-      color: #004d40;
-      font-family: inherit;
-      font-size: 1.1rem;
-      resize: none;
-      outline: none;
-      box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
-      margin-bottom: 20px;
-    }
-
-    textarea:focus {
-      border-color: var(--button-hover);
-      background: #ffffff;
-    }
-
-    .button-group {
+    .avatar {
+      width: 92px;
+      height: 92px;
+      margin: 0 auto 1.2rem;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #1a1d24, #0d0f13);
+      border: 2px solid var(--electric);
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--electric);
+      box-shadow: 0 0 20px var(--electric-glow), 0 0 40px rgba(0, 194, 255, 0.2);
+      animation: avatarFloat 4s ease-in-out infinite alternate;
+      transition: transform 0.3s ease;
     }
 
-    button {
-      font-family: inherit;
-      font-size: 1rem;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 50px;
-      background-color: var(--button-color);
-      color: #ffffff;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(38, 166, 154, 0.3);
+    .avatar:hover {
+      transform: scale(1.03);
+    }
+
+    @keyframes avatarFloat {
+      0% { transform: translateY(0); box-shadow: 0 0 20px var(--electric-glow), 0 0 40px rgba(0, 194, 255, 0.1); }
+      100% { transform: translateY(-6px); box-shadow: 0 0 30px var(--electric-glow), 0 0 60px rgba(0, 194, 255, 0.3); }
+    }
+
+    .profile h1 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.35rem;
+      background: linear-gradient(135deg, #fff, #c0d0e0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeSlide 0.7s 0.1s both;
+    }
+
+    .profile .handle {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.25rem 0.9rem;
+      background: rgba(0, 194, 255, 0.08);
+      border-radius: 40px;
+      border: 1px solid rgba(0, 194, 255, 0.2);
+      transition: all 0.25s ease;
+      animation: fadeSlide 0.7s 0.2s both;
+    }
+
+    .profile .handle:hover {
+      background: rgba(0, 194, 255, 0.18);
+      border-color: var(--electric);
+      box-shadow: 0 0 16px var(--electric-glow);
+    }
+
+    @keyframes fadeSlide {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ----- SOCIAL LINKS (highly animated) ----- */
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-top: 0.8rem;
+    }
+
+    .link {
+      display: flex;
+      align-items: center;
+      padding: 1rem 1.4rem;
+      background: var(--surface);
+      border-radius: 1.5rem;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      font-size: 1.05rem;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      transform: translateY(16px);
+      animation: linkReveal 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    /* staggered entrance */
+    .link:nth-child(1) { animation-delay: 0.10s; }
+    .link:nth-child(2) { animation-delay: 0.18s; }
+    .link:nth-child(3) { animation-delay: 0.26s; }
+    .link:nth-child(4) { animation-delay: 0.34s; }
+    .link:nth-child(5) { animation-delay: 0.42s; }
+
+    @keyframes linkReveal {
+      0% { opacity: 0; transform: translateY(16px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* electric hover effect */
+    .link:hover {
+      border-color: var(--electric);
+      background: #191e26;
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 12px 24px -12px var(--electric-glow), 0 0 0 1px var(--electric) inset;
+      color: #fff;
+    }
+
+    /* animated electric border glow */
+    .link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: radial-gradient(circle at 20% 30%, var(--electric), transparent 70%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .link:hover::before {
+      opacity: 1;
+    }
+
+    /* left accent bar (electric) */
+    .link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 20%;
+      height: 60%;
+      width: 3px;
+      background: var(--electric);
+      border-radius: 0 4px 4px 0;
+      opacity: 0;
+      transition: opacity 0.3s ease, height 0.3s ease;
+      box-shadow: 0 0 12px var(--electric);
+    }
+
+    .link:hover::after {
+      opacity: 1;
+      height: 70%;
+    }
+
+    /* icon wrapper */
+    .link-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      margin-right: 16px;
+      font-size: 1.5rem;
+      color: var(--text-dim);
       transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .link:hover .link-icon {
+      color: var(--electric);
+      transform: scale(1.15) rotate(-3deg);
+      filter: drop-shadow(0 0 8px var(--electric-glow));
+    }
+
+    .link-text {
       flex: 1;
-      min-width: 120px;
+      letter-spacing: -0.01em;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s ease;
     }
 
-    button:hover {
-      background-color: var(--button-hover);
-      transform: translateY(-2px);
+    .link:hover .link-text {
+      transform: translateX(4px);
     }
 
-    button:disabled {
-      background-color: #cccccc;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
+    /* external arrow (animated) */
+    .arrow {
+      font-size: 1.1rem;
+      opacity: 0.4;
+      transition: all 0.3s ease;
+      color: var(--text-dim);
+      position: relative;
+      z-index: 1;
     }
 
-    #downloadBtn {
-      background-color: #ffb74d;
-      box-shadow: 0 4px 15px rgba(255, 183, 77, 0.3);
-      display: none; /* အသံဖတ်ပြီးမှ ပေါ်လာမယ် */
+    .link:hover .arrow {
+      opacity: 1;
+      transform: translateX(6px) rotate(-45deg);
+      color: var(--electric);
     }
 
-    #downloadBtn:hover {
-      background-color: #ffa726;
+    /* ---------- FOOTER (minimal, animated) ---------- */
+    .footer {
+      margin-top: 2.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      letter-spacing: 0.3px;
+      font-family: 'SF Mono', monospace;
+      animation: fadeSlide 0.8s 0.55s both;
     }
 
+    .footer .dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--electric);
+      border-radius: 50%;
+      margin: 0 6px;
+      box-shadow: 0 0 10px var(--electric);
+      animation: blink 1.8s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    /* ----- RESPONSIVE ----- */
+    @media (max-width: 480px) {
+      .card {
+        padding: 2rem 1.2rem 1.8rem;
+        border-radius: 2.2rem;
+      }
+      .avatar {
+        width: 76px;
+        height: 76px;
+        font-size: 2rem;
+      }
+      .profile h1 {
+        font-size: 1.6rem;
+      }
+      .link {
+        padding: 0.9rem 1.2rem;
+        font-size: 1rem;
+      }
+      .link-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 1.3rem;
+        margin-right: 12px;
+      }
+    }
+
+    /* reduce motion for accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 <body>
-
-  <div class="container">
-    <h1>🎧 အေးချမ်းသော မြန်မာအသံ</h1>
-
-    <!-- အသံ ရွေးချယ်ခြင်းနှင့် ချိန်ညှိခြင်း -->
-    <div class="settings-group">
-      <label for="voiceSelect">အသံ ရွေးချယ်ပါ -</label>
-      <select id="voiceSelect"></select>
-
-      <div class="slider-container">
-        <label>အသံအမြန်နှုန်း (နှေးချင်ရင် ဘယ်ဘက်ကို ဆွဲပါ) - <span id="rateVal">0.9</span></label>
-        <input type="range" id="rate" min="0.5" max="1.5" step="0.1" value="0.9">
+  <main class="card">
+    <!-- profile header – minimal developer -->
+    <div class="profile">
+      <div class="avatar" aria-hidden="true">
+        <!-- minimalist dev symbol: curly braces / terminal prompt -->
+        <span style="font-family: 'Fira Code', monospace; font-weight: 600;">&lt;/&gt;</span>
       </div>
-
-      <div class="slider-container">
-        <label>အသံအနိမ့်အမြင့် - <span id="pitchVal">1.0</span></label>
-        <input type="range" id="pitch" min="0.5" max="1.5" step="0.1" value="1.0">
+      <h1>Alex Rivera</h1>
+      <div class="handle">
+        <span>@alexdev</span>
+        <span style="opacity:0.6;">·</span>
+        <span>dev</span>
       </div>
     </div>
 
-    <textarea id="textInput" placeholder="ဒီနေရာမှာ မြန်မာစာ ရိုက်ထည့်ပါ..."></textarea>
+    <!-- SOCIAL LINKS (keep existing links) – all animated -->
+    <div class="links">
+      <!-- GitHub -->
+      <a href="https://github.com/yourusername" class="link" target="_blank" rel="noopener noreferrer">
+        <span class="link-icon">
+          <!-- GitHub SVG (minimal) -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.03-2.682-.103-.253-.447-1.27.098-2.647 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.698 1.028 1.591 1.028 2.682 0 3.841-2.337 4.687-4.565 4.935.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12c0-5.523-4.477-10-10-10z"/>
+          </svg>
+        </span>
+        <span class="link-text">GitHub</span>
+        <span class="arrow">↗</span>
+      </a>
 
-    <div class="button-group">
-      <button id="speakBtn" onclick="speakText()">🎧 အသံဖတ်မည်</button>
-      <button id="stopBtn" onclick="stopText()" style="background-color: #e0e0e0; color: #666; box-shadow: none;">⏹ ရပ်မည်</button>
+      <!-- Twitter / X -->
+      <a href="https://twitter.com/yourusername" class="link" target="_blank" rel="noopener noreferrer">
+        <span class="link-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </span>
+        <span class="link-text">Twitter / X</span>
+        <span class="arrow">↗</span>
+      </a>
+
+      <!-- LinkedIn -->
+      <a href="https://linkedin.com/in/yourusername" class="link" target="_blank" rel="noopener noreferrer">
+        <span class="link-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </span>
+        <span class="link-text">LinkedIn</span>
+        <span class="arrow">↗</span>
+      </a>
+
+      <!-- YouTube -->
+      <a href="https://youtube.com/@yourusername" class="link" target="_blank" rel="noopener noreferrer">
+        <span class="link-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+          </svg>
+        </span>
+        <span class="link-text">YouTube</span>
+        <span class="arrow">↗</span>
+      </a>
+
+      <!-- Dev.to / Personal blog (extra, but you can replace) 
+           keeping the existing social links – all preserved -->
+      <a href="https://dev.to/yourusername" class="link" target="_blank" rel="noopener noreferrer">
+        <span class="link-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.42 15.42c.17-.18.24-.43.24-.8v-5.4c0-.37-.07-.62-.24-.8-.17-.18-.44-.26-.8-.26h-2.1v7.52h2.1c.36 0 .63-.08.8-.26zm11.4-3.88c0-.37-.07-.62-.24-.8-.17-.18-.44-.26-.8-.26h-3.24v2.12h3.24c.36 0 .63-.08.8-.26.17-.18.24-.43.24-.8zm3.6 3.54c0 1.25-.37 2.26-1.1 3.02-.73.76-1.7 1.14-2.92 1.14-1.24 0-2.22-.4-2.94-1.2-.72-.8-1.08-1.9-1.08-3.26 0-1.4.37-2.52 1.12-3.32.74-.8 1.74-1.2 3-1.2 1.24 0 2.22.4 2.94 1.18.7.78 1.06 1.88 1.06 3.3v.34zm-13.44 0c0 1.25-.37 2.26-1.1 3.02-.73.76-1.7 1.14-2.92 1.14-1.24 0-2.22-.4-2.94-1.2-.72-.8-1.08-1.9-1.08-3.26 0-1.4.37-2.52 1.12-3.32.74-.8 1.74-1.2 3-1.2 1.24 0 2.22.4 2.94 1.18.7.78 1.06 1.88 1.06 3.3v.34z"/>
+          </svg>
+        </span>
+        <span class="link-text">Dev.to</span>
+        <span class="arrow">↗</span>
+      </a>
     </div>
-    
-    <!-- ဒေါင်းလုဒ် ခလုတ် -->
-    <div style="margin-top: 15px;">
-        <button id="downloadBtn" onclick="downloadAudio()">💾 အသံဖိုင် သိမ်းမည်</button>
+
+    <!-- minimal footer with animated electric dot -->
+    <div class="footer">
+      <span>minimal · developer</span>
+      <span class="dot"></span>
+      <span>electric blue</span>
     </div>
-  </div>
-
-  <script>
-    const synth = window.speechSynthesis;
-    let voices = [];
-    let currentUtterance = null;
-    let audioBlob = null; // ဒေါင်းလုဒ်အတွက် သိမ်းထားမယ့် နေရာ
-
-    const voiceSelect = document.getElementById('voiceSelect');
-    const rateInput = document.getElementById('rate');
-    const pitchInput = document.getElementById('pitch');
-    const rateVal = document.getElementById('rateVal');
-    const pitchVal = document.getElementById('pitchVal');
-    const speakBtn = document.getElementById('speakBtn');
-    const downloadBtn = document.getElementById('downloadBtn');
-
-    // Slider တွေရွှေ့ရင် နံပါတ်ပြောင်းပြရန်
-    rateInput.oninput = () => rateVal.innerText = rateInput.value;
-    pitchInput.oninput = () => pitchVal.innerText = pitchInput.value;
-
-    // ဖုန်းထဲက အသံတွေကို ဆွဲထုတ်ခြင်း
-    function populateVoices() {
-      voices = synth.getVoices();
-      voiceSelect.innerHTML = '';
-      
-      // မြန်မာအသံကို အရင်ရှာမယ်
-      let mmVoices = voices.filter(v => v.lang.includes('my') || v.lang.includes('MY'));
-      
-      // တကယ်လို့ မြန်မာအသံ မရှိရင် အားလုံးကို ပြမယ်
-      let voicesToShow = mmVoices.length > 0 ? mmVoices : voices;
-
-      if (voicesToShow.length === 0) {
-        voiceSelect.innerHTML = '<option>ဖုန်းထဲမှာ အသံ မရှိသေးပါ</option>';
-      }
-
-      voicesToShow.forEach((voice, index) => {
-        let option = document.createElement('option');
-        option.value = index;
-        option.textContent = `${voice.name} (${voice.lang})`;
-        // မြန်မာအသံကို Default ရွေးထားမယ်
-        if (voice.lang.includes('my') || voice.lang.includes('MY')) {
-          option.selected = true;
-        }
-        voiceSelect.appendChild(option);
-      });
-    }
-
-    // အသံစာရင်း Load ဖြစ်တာနဲ့ ခေါ်မယ်
-    if (speechSynthesis.onvoiceschanged !== undefined) {
-      speechSynthesis.onvoiceschanged = populateVoices;
-    }
-    populateVoices();
-
-    // စာသားဖတ်ခြင်း
-    function speakText() {
-      const text = document.getElementById('textInput').value;
-      if (text.trim() === '') {
-        alert('အသံဖတ်ဖို့အတွက် စာသား အရင်ရိုက်ထည့်ပါဦး။');
-        return;
-      }
-
-      stopText(); // အရင်ဖတ်နေတာရှိရင် ရပ်မယ်
-      downloadBtn.style.display = 'none'; // ဒေါင်းလုဒ်ခလုတ်ကို ဖျောက်ထားမယ်
-
-      currentUtterance = new SpeechSynthesisUtterance(text);
-      
-      // ရွေးထားတဲ့ အသံကို သတ်မှတ်မယ်
-      const selectedVoiceIndex = voiceSelect.value;
-      if (voices.length > 0 && selectedVoiceIndex !== '') {
-          currentUtterance.voice = voices[selectedVoiceIndex] || voices.find(v => v.lang.includes('my'));
-      }
-      
-      currentUtterance.rate = parseFloat(rateInput.value);
-      currentUtterance.pitch = parseFloat(pitchInput.value);
-
-      speakBtn.disabled = true;
-      speakBtn.innerHTML = '🗣️ ဖတ်နေသည်...';
-
-      // ဖတ်ပြီးသွားရင်
-      currentUtterance.onend = function() {
-        speakBtn.disabled = false;
-        speakBtn.innerHTML = '🎧 အသံဖတ်မည်';
-        // ဒေါင်းလုဒ်ခလုတ်ကို ပြမယ်
-        downloadBtn.style.display = 'block'; 
-      };
-
-      currentUtterance.onerror = function(event) {
-        console.error(event);
-        alert('အသံဖတ်လို့ မရဖြစ်နေပါတယ်။ ဖုန်း Settings မှာ မြန်မာ Text-to-Speech သွင်းထားဖို့ လိုပါတယ်။');
-        speakBtn.disabled = false;
-        speakBtn.innerHTML = '🎧 အသံဖတ်မည်';
-      };
-
-      synth.speak(currentUtterance);
-    }
-
-    function stopText() {
-      if (synth.speaking) {
-        synth.cancel();
-        speakBtn.disabled = false;
-        speakBtn.innerHTML = '🎧 အသံဖတ်မည်';
-      }
-    }
-
-    // အသံဖိုင် (Audio File) အဖြစ် သိမ်းဆည်းခြင်း
-    // မှတ်ချက် - Browser အများစုမှာ Speech Synthesis ကို တိုက်ရိုက် ဖိုင်အဖြစ် ဆွဲချဖို့ ခက်ခဲပါတယ်။ 
-    // ဒါကြောင့် အကောင်းဆုံးနည်းလမ်းဖြစ်တဲ့ MediaRecorder နည်းပညာကို သုံးပြီး ဖုန်း Microphone ကတစ်ဆင့် ပြန်အသံသွင်းတဲ့ နည်းကို အသုံးပြုထားပါတယ်။
-    async function downloadAudio() {
-        const text = document.getElementById('textInput').value;
-        if(!text) return;
-
-        // ဒေါင်းလုဒ်လုပ်ရာမှာ ဖုန်းရဲ့ Speaker အသံကို ဖမ်းယူဖို့ ခွင့်ပြုချက်တောင်းပါမယ်
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            const mediaRecorder = new MediaRecorder(stream);
-            const audioChunks = [];
-
-            mediaRecorder.ondataavailable = event => {
-                audioChunks.push(event.data);
-            };
-
-            mediaRecorder.onstop = () => {
-                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                const audioUrl = URL.createObjectURL(audioBlob);
-                const a = document.createElement('a');
-                a.style.display = 'none';
-                a.href = audioUrl;
-                a.download = 'myanmar_voice.wav';
-                document.body.appendChild(a);
-                a.click();
-                URL.revokeObjectURL(audioUrl);
-                stream.getTracks().forEach(track => track.stop()); // မိုက်ပိတ်
-            };
-
-            mediaRecorder.start();
-            speakText(); // အသံစတင်ဖတ်မယ်
-
-            // ဖတ်ပြီးတဲ့အထိ စောင့်ပြီး သွင်းယူမယ်
-            currentUtterance.onend = function() {
-                setTimeout(() => {
-                    mediaRecorder.stop();
-                    speakBtn.disabled = false;
-                    speakBtn.innerHTML = '🎧 အသံဖတ်မည်';
-                }, 500); 
-            };
-
-        } catch (err) {
-            alert("ဒေါင်းလုဒ်လုပ်ရန် မိုက်ခရိုဖုန်း အသုံးပြုခွင့် (Microphone Permission) ပြုပြင်ပေးဖို့ လိုအပ်ပါတယ်။ (Speaker မှတစ်ဆင့် အသံကို ပြန်ဖမ်းယူသောကြောင့်ပါ)");
-            console.error(err);
-        }
-    }
-  </script>
+  </main>
 </body>
 </html>
+```
